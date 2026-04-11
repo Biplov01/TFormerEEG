@@ -176,6 +176,3 @@ CNN_Only → Convolutional backbone only
 Transformer_Only → Transformer encoder only
 for ablation study
 
-
-
-Baseline models: 
