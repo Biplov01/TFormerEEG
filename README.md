@@ -76,6 +76,9 @@ Remaining Channels Used:
 19 EEG channels are retained for processing.
 
 ⚙️ Processing Pipeline
+
+
+
 1️⃣ Data Extraction
 
 The function process_data(mat_data):
@@ -86,6 +89,9 @@ Marker labels → o_data['marker']
 Filters:
 Keeps only selected EEG channels
 Removes unwanted channels
+
+
+
 2️⃣ Event Detection
 
 The script detects motor imagery events based on marker transitions:
