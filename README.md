@@ -4,9 +4,9 @@ EEG-based AI-BCI Wheelchair Advancement: Hybrid Deep Learning with Motor Imagery
 
 Authors:
 
-Bipul Thapa
-Biplov Paneru
-Bishwash Paneru
+Bipul Thapa,
+Biplov Paneru,
+Bishwash Paneru,
 Khem Narayan Poudyal
 
 📌 DOI: https://doi.org/10.48550/arXiv.2509.25667
