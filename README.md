@@ -22,6 +22,9 @@ BibTeX
   year={2025},
   doi={10.48550/arXiv.2509.25667}
 }
+
+
+
 Project details:
 
 
@@ -142,9 +145,10 @@ Final Dataset Shape:
 
 Install required libraries:
 
-pip install numpy pandas scipy
-▶️ How to Run
-python your_script_name.py
+pip install numpy pandas scipy matplotlib
+
+
+
 🔬 Summary
 
 This pipeline:
@@ -157,7 +161,9 @@ Converts EEG signals into flattened ML-ready feature vectors
 Saves a combined CSV dataset for machine learning
 
 
+Models: XGBoost, EEGNet, Trasnformer-based & CTHM
 
+Best performance: Convolutional Transformer Hybrid model (93% accuracy)
 
 🔬 Ablation Study — CTHM (Convolutional Transformer Hybrid Model)
 
@@ -169,5 +175,7 @@ Hybrid_Full (CTHM) → CNN + Transformer
 CNN_Only → Convolutional backbone only
 Transformer_Only → Transformer encoder only
 for ablation study
+
+
 
 Baseline models: 
