@@ -12,7 +12,7 @@ Khem Narayan Poudyal
 📌 DOI: https://doi.org/10.48550/arXiv.2509.25667
 
 
-If you use this code, dataset processing pipeline, or the proposed CTHM (Convolutional Transformer Hybrid Model) in your research, please cite the paper as follows:
+If you use this code, dataset processing pipeline, or the proposed TFormerEEG in your research, please cite the paper as follows:
 
 BibTeX
 @article{thapa2025eegbci,
@@ -167,17 +167,16 @@ Converts EEG signals into flattened ML-ready feature vectors
 Saves a combined CSV dataset for machine learning
 
 
-Models: XGBoost, EEGNet, Trasnformer-based & CTHM
+Models: XGBoost, EEGNet, Trasnformer-based & TFormerEEG
 
 Best performance: Convolutional Transformer Hybrid model (93% accuracy)
 
-🔬 Ablation Study — CTHM (Convolutional Transformer Hybrid Model)
-
-To evaluate the contribution of each architectural component, we performed an ablation study on the proposed CTHM (Convolutional Transformer Hybrid Model).
+🔬 Ablation Study — TFormerEEG 
+To evaluate the contribution of each architectural component, we performed an ablation study on the proposed TFormerEEG.
 
 We compared:
 
-Hybrid_Full (CTHM) → CNN + Transformer
+Hybrid_Full (TFormerEEG) → CNN + Transformer
 CNN_Only → Convolutional backbone only
 Transformer_Only → Transformer encoder only
 for ablation study
