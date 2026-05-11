@@ -178,5 +178,5 @@ Models performance details can be viewed at:
 
 and the data loading to preprocessing is given in:
 
-motor_Imagery_EEG.ipynb
+--motor_Imagery_EEG.ipynb
 
