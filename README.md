@@ -171,11 +171,6 @@ Models: XGBoost, EEGNet, Trasnformer-based & TFormerEEG
 
 Best performance: TFormerEEG (93% accuracy)
 
-
-We compared:
-
- (TFormerEEG) 
-CNN_Only → Convolutional backbone only
-Transformer_Only → Transformer encoder only
-for ablation study
+Models performance details can be viewed at: motor-imagery-all-models.ipynb
+and the data loading to preprocessing is given in: motor_Imagery_EEG.ipynb
 
