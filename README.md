@@ -171,6 +171,8 @@ Models: XGBoost, EEGNet, Trasnformer-based & TFormerEEG
 
 Best performance: TFormerEEG (93% accuracy)
 
-Models performance details can be viewed at: motor-imagery-all-models.ipynb
+Models performance details can be viewed at: 
+
+motor-imagery-all-models.ipynb
 and the data loading to preprocessing is given in: motor_Imagery_EEG.ipynb
 
