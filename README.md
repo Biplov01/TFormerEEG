@@ -169,14 +169,12 @@ Saves a combined CSV dataset for machine learning
 
 Models: XGBoost, EEGNet, Trasnformer-based & TFormerEEG
 
-Best performance: Convolutional Transformer Hybrid model (93% accuracy)
+Best performance: TFormerEEG (93% accuracy)
 
-🔬 Ablation Study — TFormerEEG 
-To evaluate the contribution of each architectural component, we performed an ablation study on the proposed TFormerEEG.
 
 We compared:
 
-Hybrid_Full (TFormerEEG) → CNN + Transformer
+ (TFormerEEG) 
 CNN_Only → Convolutional backbone only
 Transformer_Only → Transformer encoder only
 for ablation study
