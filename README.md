@@ -1,20 +1,31 @@
-This repository is associated with the following research study:
+# EEG-based AI-BCI Wheelchair Advancement
 
-EEG-based AI-BCI Wheelchair Advancement: Hybrid Deep Learning with Motor Imagery for Brain Computer Interface
+This repository accompanies the research study:
 
-Authors:
+> **EEG-based AI-BCI Wheelchair Advancement: Hybrid Deep Learning with Motor Imagery for Brain Computer Interface**
 
-Bipul Thapa,
-Biplov Paneru,
-Bishwash Paneru,
-Khem Narayan Poudyal
+---
 
-📌 DOI: https://doi.org/10.48550/arXiv.2509.25667
+## Authors
 
+- Bipul Thapa
+- Biplov Paneru
+- Bishwash Paneru
+- Khem Narayan Poudyal
 
-If you use this code, dataset processing pipeline, or the proposed TFormerEEG in your research, please cite the paper as follows:
+---
 
-BibTeX
+## DOI
+
+https://doi.org/10.48550/arXiv.2509.25667
+
+---
+
+# Citation
+
+If you use this repository, preprocessing pipeline, dataset preparation methodology, or the proposed **TFormerEEG** architecture in your research, please cite:
+
+```bibtex
 @article{thapa2025eegbci,
   title={EEG-based AI-BCI Wheelchair Advancement: Hybrid Deep Learning with Motor Imagery for Brain Computer Interface},
   author={Thapa, Bipul and Paneru, Biplov and Paneru, Bishwash and Poudyal, Khem Narayan},
@@ -22,161 +33,312 @@ BibTeX
   year={2025},
   doi={10.48550/arXiv.2509.25667}
 }
+```
 
+---
 
+# Project Overview
 
-Project details:
+This project focuses on:
 
+- EEG Motor Imagery signal preprocessing
+- Brain-Computer Interface (BCI) research
+- Deep learning for EEG classification
+- Hybrid Transformer-based EEG architectures
+- AI-assisted wheelchair advancement systems
 
-EEG Motor Imagery Dataset Processing
+The repository includes:
 
-This project processes the EEG Motor Imagery Dataset from:
+- EEG preprocessing pipeline
+- Feature extraction workflow
+- Deep learning model implementations
+- Transformer-based EEG architectures
+- Performance evaluation notebooks
 
-Kaya et al. (2018)
-“A large electroencephalographic motor imagery dataset for electroencephalographic brain computer interfaces”
-DOI: https://doi.org/10.1038/sdata.2018.211
+---
 
-📥 Dataset Download Instructions
-Visit the dataset repository associated with the paper.
-Download the .mat files for CLASubjectE:
+# Dataset Information
+
+This project uses the EEG Motor Imagery dataset from:
+
+> Kaya et al. (2018)  
+> *A large electroencephalographic motor imagery dataset for electroencephalographic brain computer interfaces*
+
+DOI:
+
+https://doi.org/10.1038/sdata.2018.211
+
+---
+
+# Dataset Download Instructions
+
+Download the following `.mat` files for **CLASubjectE**:
+
+```text
 CLASubjectE1601223StLRHand.mat
 CLASubjectE1601193StLRHand.mat
 CLASubjectE1512253StLRHand.mat
+```
 
-⚠️ Note: This implementation uses Subject E. It can be extended to other subjects as needed.
+Place the downloaded files in a local directory.
 
-Place the downloaded files in a local directory
 Example:
 
+```text
 C:\Users\YourName\Downloads\
+```
 
-Update the file paths in the script:
+Update the paths inside the preprocessing script:
 
+```python
 mat_file_paths = [
     r"path_to_your_folder/CLASubjectE1601223StLRHand.mat",
     r"path_to_your_folder/CLASubjectE1601193StLRHand.mat",
     r"path_to_your_folder/CLASubjectE1512253StLRHand.mat",
 ]
-Run the script.
-🧠 EEG Channel Configuration
+```
 
-We define 22 EEG channel names:
+> **Note:**  
+> This implementation currently uses **Subject E**, but can be extended to additional subjects.
 
+---
+
+# EEG Channel Configuration
+
+## Original EEG Channels
+
+```text
 Fp1, Fp2, F3, F4, C3, C4, P3, P4, O1, O2,
 A1, A2, F7, F8, T3, T4, T5, T6, Fz, Cz, Pz, X5
-Removed Channels:
+```
+
+## Removed Channels
+
+The following channels are excluded during preprocessing:
+
+```text
 A1
 A2
 X5
+```
 
-These channels are excluded from feature extraction.
+## Remaining Channels
 
-Remaining Channels Used:
+A total of **19 EEG channels** are retained for feature extraction and modeling.
 
-19 EEG channels are retained for processing.
+---
 
-⚙️ Processing Pipeline
+# Processing Pipeline
 
+## 1. Data Extraction
 
+The function:
 
-1️⃣ Data Extraction
+```python
+process_data(mat_data)
+```
 
-The function process_data(mat_data):
+performs the following operations:
 
-Extracts:
-EEG signal data → o_data['data']
-Marker labels → o_data['marker']
-Filters:
-Keeps only selected EEG channels
-Removes unwanted channels
+- Extracts EEG signal data from:
 
+```python
+o_data['data']
+```
 
+- Extracts marker labels from:
 
-2️⃣ Event Detection
+```python
+o_data['marker']
+```
 
-The script detects motor imagery events based on marker transitions:
+- Removes unwanted EEG channels
+- Retains selected EEG channels for processing
 
-0 → 1 → Class 1
-0 → 2 → Class 2
+---
+
+## 2. Event Detection
+
+Motor imagery events are detected using marker transitions.
+
+### Event Mapping
+
+| Marker Transition | Class |
+|---|---|
+| `0 → 1` | Class 1 |
+| `0 → 2` | Class 2 |
 
 Each detected event stores:
 
+```python
 [class_label, onset_sample]
+```
 
-Returned values:
+### Returned Variables
 
-class_info_array → Event label and onset index
-data_key → Filtered EEG data
-marker_data → Label data
-3️⃣ Feature Extraction
+| Variable | Description |
+|---|---|
+| `class_info_array` | Event labels and onset indices |
+| `data_key` | Filtered EEG data |
+| `marker_data` | EEG marker labels |
+
+---
+
+## 3. Feature Extraction
 
 For each detected event:
 
-Extract 200 samples before onset
-Extract 200 samples after onset
+- 200 samples before onset are extracted
+- 200 samples after onset are extracted
 
-For each window:
+### Window Processing
 
-EEG signals are flattened into a 1D feature vector
-Corresponding marker label is appended at the end
-Per Event Output:
-1 row → Before onset
-1 row → After onset
-📊 Feature Dimension
+For every EEG window:
 
-If:
+- Signals are flattened into a 1D feature vector
+- Corresponding label is appended
 
-200 samples
-19 channels
+### Per Event Output
 
-Then:
+| Output | Description |
+|---|---|
+| Row 1 | Before onset window |
+| Row 2 | After onset window |
 
+---
+
+# Feature Dimension
+
+Given:
+
+- 200 temporal samples
+- 19 EEG channels
+
+The resulting feature dimension becomes:
+
+```text
 200 × 19 = 3800 features
 + 1 label column
-= 3801 columns total
-📁 Output
+= 3801 total columns
+```
 
-The script:
+---
 
-Processes all three .mat files
-Extracts features
-Combines all extracted rows
-Saves a single CSV file:
+# Output Dataset
+
+The preprocessing pipeline:
+
+- Processes all `.mat` files
+- Extracts EEG windows
+- Generates feature vectors
+- Combines all extracted samples
+- Saves the final dataset as CSV
+
+## Output File
+
+```text
 D:\paper eeg\combined_eeg_features.csv
-Final Dataset Shape:
+```
+
+## Final Dataset Shape
+
+```text
 (3808, 3801)
-3808 rows → All extracted windows
-3801 columns → 3800 features + 1 label
-📦 Dependencies
+```
 
-Install required libraries:
+| Dimension | Description |
+|---|---|
+| 3808 rows | Extracted EEG windows |
+| 3801 columns | 3800 features + 1 label |
 
+---
+
+# Implemented Models
+
+The repository includes implementations of:
+
+- XGBoost
+- EEGNet
+- Transformer-based EEG models
+- TFormerEEG
+
+---
+
+# Best Performance
+
+| Model | Accuracy |
+|---|---|
+| TFormerEEG | ~93% |
+
+---
+
+# Repository Structure
+
+```text
+models/
+│
+├── motor-imagery-all-models.ipynb
+├── motor_Imagery_EEG.ipynb
+```
+
+---
+
+# Important Files
+
+## Model Performance Evaluation
+
+```text
+models/motor-imagery-all-models.ipynb
+```
+
+Contains:
+
+- Model training
+- Cross-validation
+- Accuracy evaluation
+- F1-score analysis
+- Performance comparison
+
+---
+
+## EEG Data Loading and Preprocessing
+
+```text
+models/motor_Imagery_EEG.ipynb
+```
+
+Contains:
+
+- EEG loading pipeline
+- Channel filtering
+- Event detection
+- Feature extraction
+- CSV dataset generation
+
+---
+
+# Dependencies
+
+Install required Python libraries:
+
+```bash
 pip install numpy pandas scipy matplotlib
+```
 
+---
 
+# Summary
 
-🔬 Summary
+This repository provides a complete EEG Motor Imagery processing and deep learning framework for Brain-Computer Interface research.
 
-This pipeline:
+The pipeline:
 
-Loads raw EEG .mat files
-Filters selected EEG channels
-Detects motor imagery events
-Extracts time-windowed features
-Converts EEG signals into flattened ML-ready feature vectors
-Saves a combined CSV dataset for machine learning
+- Loads raw EEG `.mat` files
+- Filters EEG channels
+- Detects motor imagery events
+- Extracts temporal EEG windows
+- Converts EEG data into machine learning-ready features
+- Trains deep learning architectures
+- Evaluates Transformer-based EEG classification models
 
-
-Models: XGBoost, EEGNet, Trasnformer-based & TFormerEEG
-
---Best performance: TFormerEEG (93% accuracy)
-
-Models performance details can be viewed at: 
-
---models/motor-imagery-all-models.ipynb
-
-
-and the data loading to preprocessing is given in:
-
---models/motor_Imagery_EEG.ipynb
-
+The proposed **TFormerEEG** architecture achieved the best overall performance with approximately **93% accuracy**.
