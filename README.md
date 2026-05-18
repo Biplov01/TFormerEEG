@@ -334,7 +334,7 @@ This repository provides a complete EEG Motor Imagery processing and deep learni
 The pipeline:
 
 - Loads raw EEG `.mat` files
-- Filters EEG channels
+- Filters non-required EEG channels
 - Detects motor imagery events
 - Extracts temporal EEG windows
 - Converts EEG data into machine learning-ready features
